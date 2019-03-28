@@ -10,18 +10,33 @@
 #import "AES128.h"
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+
+@property (weak, nonatomic) IBOutlet UIButton *okBtn;
+
+@property (weak, nonatomic) IBOutlet UILabel *showLabel;
+
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *password = @"##ACT1111";
-    
+    [self initUI];
+}
+
+-(void)initUI{
+    self.okBtn.layer.masksToBounds = YES;
+    self.okBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.okBtn.layer.borderWidth = 1.f;
+    self.okBtn.layer.cornerRadius = 5;
+}
+
+- (IBAction)okBtnClick:(id)sender {
+    NSString *password = self.textField.text;
     NSString *encryptStr = [AES128 AES128Encrypt:password];
-    NSString *decryptStr = [AES128 AES128Decrypt:encryptStr];
-    
-    NSLog(@"%@-------%@",encryptStr, decryptStr);
+    self.showLabel.text = [NSString stringWithFormat:@"加密后：%@",encryptStr];
 }
 
 
