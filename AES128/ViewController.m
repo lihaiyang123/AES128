@@ -35,7 +35,7 @@
 
 - (IBAction)okBtnClick:(id)sender {
     NSString *password = self.textField.text;
-    NSString *encryptStr = [AES128 AES128Encrypt:password];
+    NSString *encryptStr = [AES128 AES128EncryptCBC:password];
     self.showLabel.text = [NSString stringWithFormat:@"加密后：%@",encryptStr];
 }
 
